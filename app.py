@@ -1,42 +1,63 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+from flask_session import Session
+import os
 
-app = Flask(__name__)#creates the app object
-app.secret_key = "supersecretkey"  # required for session to work
+app = Flask(__name__)
+app.secret_key = "supersecretkey"
+
+
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
+
+
+
 
 @app.route("/")
 def index():
-    # If user already logged in, show home
     if session.get("logged_in"):
-        return render_template("home.html")
-    return render_template("index.html")
+        return render_template("home.html", title="Home", body_class="home-body")
 
-@app.route("/login", methods=["POST"])
+    return render_template("index.html", title="Login", body_class="login-body")
+
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    username = request.form["username"]
-    password = request.form["password"]
+    username = request.form.get("username")
+    password = request.form.get("password")
 
-    # simple demo login
     if username == "Demo_user" and password == "pass1234":
         session["logged_in"] = True
-        return render_template("home.html")
-    else:
-        # return invalid login message
-        return """
-        <div class="login-container shake">
-          <h1 class="login-title">Welcome Back 👋</h1>
-          <p class="login-subtitle" style="color:red;">Invalid credentials!</p>
-          <form hx-post="/login" hx-target="body" hx-swap="outerHTML" class="login-form">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit" class="login-btn">Login</button>
-          </form>
-        </div>
-        """
+
+        
+        if "HX-Request" in request.headers:
+            return render_template("home_partial.html", show_welcome=True)
+
+        
+        return render_template(
+            "home.html",
+            show_welcome=True,
+            title="Home",
+            body_class="home-body",
+        )
+
+    
+    return render_template(
+        "index.html",
+        error="Invalid username or password!",
+        title="Login",
+        body_class="login-body",
+    )
+
 
 @app.route("/logout")
 def logout():
     session.clear()
-    return render_template("index.html")
+    return redirect(url_for("index"))
+
+
+# ------------------- MAIN APP RUNNER -------------------
 
 if __name__ == "__main__":
-    app.run(debug=True)#starts the built-in development server
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)

@@ -1,4 +1,4 @@
-/*  General Reset */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -6,13 +6,38 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/*  Login Page */
-.login-body {
-  background-color: #d5ff40;
-  height: 100vh;
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Shared App Wrapper */
+#app {
+  width: 100%;
+  min-height: 100vh;
+
+  /* CENTER CHILDREN IF LOGIN PAGE */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* ---------------------------------------------------
+   LOGIN PAGE
+--------------------------------------------------- */
+
+.login-body {
+  background-color: #d5ff40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .login-container {
@@ -60,12 +85,31 @@
   background: #222;
 }
 
-/* Home Page */
+/* Shake animation */
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+/* ---------------------------------------------------
+   HOME PAGE
+--------------------------------------------------- */
+
 .home-body {
   background: #d5ff40;
   min-height: 100vh;
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
+}
+
+.home-wrapper {
+  width: 100%;
 }
 
 /* Navbar */
@@ -129,40 +173,24 @@
   padding: 8px 12px;
   margin-right: 8px;
   border-radius: 25px;
-  font-size: 0.9rem;
+}
+
+/* Hero Image */
+.hero-image img {
+  width: 350px;
+  border-radius: 20px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* Footer */
 .footer {
   text-align: center;
   padding: 20px;
-  background: #000;
-  color: #d5ff40;
-  font-weight: 500;
-  letter-spacing: 1px;
+  color: #000;
 }
 
-/* Animations */
+/* Fade In Animation */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-
-.shake {
-  animation: shake 0.4s ease-in-out;
-}
-
