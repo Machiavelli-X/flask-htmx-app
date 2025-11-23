@@ -5,12 +5,9 @@ import os
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
 
-
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
-
-
 
 
 @app.route("/")
@@ -21,19 +18,17 @@ def index():
     return render_template("index.html", title="Login", body_class="login-body")
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=["POST"])
 def login():
     username = request.form.get("username")
     password = request.form.get("password")
 
     if username == "Demo_user" and password == "pass1234":
         session["logged_in"] = True
-
         
         if "HX-Request" in request.headers:
             return render_template("home_partial.html", show_welcome=True)
 
-        
         return render_template(
             "home.html",
             show_welcome=True,
@@ -41,7 +36,6 @@ def login():
             body_class="home-body",
         )
 
-    
     return render_template(
         "index.html",
         error="Invalid username or password!",
@@ -56,8 +50,6 @@ def logout():
     return redirect(url_for("index"))
 
 
-# ------------------- MAIN APP RUNNER -------------------
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=port)
