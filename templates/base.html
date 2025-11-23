@@ -10,8 +10,37 @@
 </head>
 
 <body class="{{ body_class }}">
+
+  <!-- EVERYTHING in your pages appears inside this div -->
   <div id="app">
     {% block content %}{% endblock %}
   </div>
+
+  <!-- 🔥 Logout Popup Overlay -->
+  <div id="logout-overlay">
+    <div class="logout-popup">
+      <h2>Are you sure?</h2>
+      <p>You will be logged out.</p>
+
+      <div class="popup-btns">
+        <a href="/logout" class="logout-yes">Yes</a>
+        <button class="logout-no" onclick="hideLogoutPopup()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup JS -->
+  <script>
+    function showLogoutPopup() {
+      document.getElementById("logout-overlay").style.display = "flex";
+      document.getElementById("app").classList.add("blurred");
+    }
+
+    function hideLogoutPopup() {
+      document.getElementById("logout-overlay").style.display = "none";
+      document.getElementById("app").classList.remove("blurred");
+    }
+  </script>
+
 </body>
 </html>
