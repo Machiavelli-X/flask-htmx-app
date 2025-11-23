@@ -1,39 +1,42 @@
-<div id="app">
-  <div class="home-wrapper">
+{% extends "base.html" %}
+{% block content %}
 
-    {% if show_welcome %}
-      <script>alert("Welcome back, Demo_user!");</script>
-    {% endif %}
+<div class="home-wrapper">
 
-    <header class="navbar">
-      <div class="logo">Guten Tag!</div>
-      <nav>
-        <a href="#">About</a>
-        <a href="#">Projects</a>
-        <a href="#">Services</a>
-        <a href="/logout">Logout</a>
-      </nav>
-    </header>
+  {% if show_welcome %}
+    <script>alert("Welcome back, Demo_user!");</script>
+  {% endif %}
 
-    <main class="hero">
-      <div class="hero-text">
-        <h1>Willkommen, mein Herr</h1>
-        <p>The test home page — where creativity meets interactivity ⚡</p>
+  <header class="navbar">
+    <div class="logo">Guten Tag!</div>
+    <nav>
+      <a href="#">About</a>
+      <a href="#">Projects</a>
+      <a href="#">Services</a>
+      <a href="javascript:void(0)" onclick="showLogoutPopup()">Logout</a>
+    </nav>
+  </header>
 
-        <div class="hero-tags">
-          <span>🚀 Interactive Demo</span>
-          <span>✨ Built with HTMX</span>
-        </div>
+  <main class="hero">
+    <div class="hero-text">
+      <h1>Willkommen, mein Herr</h1>
+      <p>The test home page — where creativity meets interactivity ⚡</p>
+
+      <div class="hero-tags">
+        <span>🚀 Interactive Demo</span>
+        <span>✨ Built with HTMX</span>
       </div>
+    </div>
 
-      <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1677007766618-9933e5480cbb?auto=format&fit=crop&w=800&q=80" alt="Art Image" />
-      </div>
-    </main>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1677007766618-9933e5480cbb?auto=format&fit=crop&w=800&q=80" alt="Art Image" />
+    </div>
+  </main>
 
-    <footer class="footer">
-      <p>💻 Created by Ayaan | Test Home Page</p>
-    </footer>
+  <footer class="footer">
+    <p>💻 Created by Ayaan | Test Home Page</p>
+  </footer>
 
-  </div>
 </div>
+
+{% endblock %}
