@@ -1,46 +1,53 @@
-<div class="home-wrapper" data-theme="{{ theme }}">
+{% extends "base.html" %}
+{% block content %}
 
-  <header class="navbar">
-    <div class="logo">Guten Tag!</div>
+<div id="app">
+  <div class="home-wrapper" data-theme="{{ theme }}">
 
-    <nav>
-      <a href="#">About</a>
-      <a href="#">Projects</a>
-      <a href="#">Services</a>
+    <header class="navbar">
+      <div class="logo">Guten Tag!</div>
 
-      <!-- HTMX Theme Toggle -->
-      <button 
-        hx-post="/toggle-theme"
-        hx-target="#app"
-        hx-swap="outerHTML"
-        class="theme-toggle">
-        <span class="theme-icon">
-          {{ '🌙' if theme == 'light' else '☀️' }}
-        </span>
-      </button>
+      <nav>
+        <a href="#">About</a>
+        <a href="#">Projects</a>
+        <a href="#">Services</a>
 
-      <a href="javascript:void(0)" onclick="showLogoutPopup()">Logout</a>
-    </nav>
-  </header>
+        <!-- HTMX Theme Toggle -->
+        <button 
+          hx-post="/toggle-theme"
+          hx-target="#app"
+          hx-swap="outerHTML"
+          class="theme-toggle">
+          <span class="theme-icon">
+            {{ '🌙' if theme == 'light' else '☀️' }}
+          </span>
+        </button>
 
-  <main class="hero">
-    <div class="hero-text">
-      <h1>Willkommen, mein Herr</h1>
-      <p>The test home page — where creativity meets interactivity ⚡</p>
+        <a href="javascript:void(0)" onclick="showLogoutPopup()">Logout</a>
+      </nav>
+    </header>
 
-      <div class="hero-tags">
-        <span>🚀 Interactive Demo</span>
-        <span>✨ Built with HTMX</span>
+    <main class="hero">
+      <div class="hero-text">
+        <h1>Willkommen, mein Herr</h1>
+        <p>The test home page — where creativity meets interactivity ⚡</p>
+
+        <div class="hero-tags">
+          <span>🚀 Interactive Demo</span>
+          <span>✨ Built with HTMX</span>
+        </div>
       </div>
-    </div>
 
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1677007766618-9933e5480cbb?auto=format&fit=crop&w=800&q=80" alt="Art Image" />
-    </div>
-  </main>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1677007766618-9933e5480cbb?auto=format&fit=crop&w=800&q=80" alt="Art Image" />
+      </div>
+    </main>
 
-  <footer class="footer">
-    <p>💻 Created by Ayaan | Test Home Page</p>
-  </footer>
+    <footer class="footer">
+      <p>💻 Created by Ayaan | Test Home Page</p>
+    </footer>
 
+  </div>
 </div>
+
+{% endblock %}
