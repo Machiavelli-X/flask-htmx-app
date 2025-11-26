@@ -10,13 +10,11 @@
 </head>
 
 <body class="{{ body_class }}">
-
-  <!-- EVERYTHING in your pages appears inside this div -->
   <div id="app">
     {% block content %}{% endblock %}
   </div>
 
-  <!-- 🔥 Logout Popup Overlay -->
+  <!-- Logout Popup -->
   <div id="logout-overlay">
     <div class="logout-popup">
       <h2>Are you sure?</h2>
@@ -29,7 +27,6 @@
     </div>
   </div>
 
-  <!-- Popup JS -->
   <script>
     function showLogoutPopup() {
       document.getElementById("logout-overlay").style.display = "flex";
@@ -41,6 +38,5 @@
       document.getElementById("app").classList.remove("blurred");
     }
   </script>
-
 </body>
 </html>
