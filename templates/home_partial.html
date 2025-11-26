@@ -1,18 +1,24 @@
-{% extends "base.html" %}
-{% block content %}
-
-<div class="home-wrapper">
-
-  {% if show_welcome %}
-    <script>alert("Welcome back, Demo_user!");</script>
-  {% endif %}
+<div class="home-wrapper" data-theme="{{ theme }}">
 
   <header class="navbar">
     <div class="logo">Guten Tag!</div>
+
     <nav>
       <a href="#">About</a>
       <a href="#">Projects</a>
       <a href="#">Services</a>
+
+      <!-- HTMX Theme Toggle -->
+      <button 
+        hx-post="/toggle-theme"
+        hx-target="#app"
+        hx-swap="outerHTML"
+        class="theme-toggle">
+        <span class="theme-icon">
+          {{ '🌙' if theme == 'light' else '☀️' }}
+        </span>
+      </button>
+
       <a href="javascript:void(0)" onclick="showLogoutPopup()">Logout</a>
     </nav>
   </header>
@@ -38,5 +44,3 @@
   </footer>
 
 </div>
-
-{% endblock %}
