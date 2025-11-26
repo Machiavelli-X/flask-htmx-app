@@ -97,11 +97,10 @@ body {
 }
 
 /* ---------------------------------------------------
-   HOME PAGE
+   HOME PAGE - LIGHT THEME (DEFAULT)
 --------------------------------------------------- */
 
 .home-body {
-  background: #d5ff40;
   min-height: 100vh;
   display: flex;
   justify-content: flex-start;
@@ -110,6 +109,9 @@ body {
 
 .home-wrapper {
   width: 100%;
+  background: #d5ff40;
+  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
 }
 
 /* Navbar */
@@ -123,18 +125,51 @@ body {
 .logo {
   font-weight: bold;
   font-size: 1.5rem;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .navbar nav a {
-  margin-left: 25px;
   text-decoration: none;
-  color: #000;
-  font-weight: 500;
-  transition: 0.3s;
+  color: #d5ff40;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: #000;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.95rem;
 }
 
 .navbar nav a:hover {
-  opacity: 0.6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: #000;
+  color: #d5ff40;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Hero Section */
@@ -155,12 +190,14 @@ body {
   font-size: 3rem;
   font-weight: 900;
   color: #000;
+  transition: color 0.3s ease;
 }
 
 .hero-text p {
   margin-top: 10px;
   color: #333;
   font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
 .hero-tags {
@@ -173,6 +210,7 @@ body {
   padding: 8px 12px;
   margin-right: 8px;
   border-radius: 25px;
+  transition: all 0.3s ease;
 }
 
 /* Hero Image */
@@ -180,6 +218,7 @@ body {
   width: 350px;
   border-radius: 20px;
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.3s ease;
 }
 
 /* Footer */
@@ -187,6 +226,50 @@ body {
   text-align: center;
   padding: 20px;
   color: #000;
+  transition: color 0.3s ease;
+}
+
+/* ---------------------------------------------------
+   DARK THEME
+--------------------------------------------------- */
+
+.home-wrapper[data-theme="dark"] {
+  background: #1a1a1a;
+}
+
+.home-wrapper[data-theme="dark"] .logo {
+  color: #d5ff40;
+}
+
+.home-wrapper[data-theme="dark"] .navbar nav a {
+  color: #1a1a1a;
+  background: #d5ff40;
+}
+
+.home-wrapper[data-theme="dark"] .theme-toggle {
+  background: #d5ff40;
+  color: #1a1a1a;
+}
+
+.home-wrapper[data-theme="dark"] .hero-text h1 {
+  color: #d5ff40;
+}
+
+.home-wrapper[data-theme="dark"] .hero-text p {
+  color: #b8b8b8;
+}
+
+.home-wrapper[data-theme="dark"] .hero-tags span {
+  background: #d5ff40;
+  color: #1a1a1a;
+}
+
+.home-wrapper[data-theme="dark"] .hero-image img {
+  box-shadow: 0px 6px 20px rgba(213, 255, 64, 0.3);
+}
+
+.home-wrapper[data-theme="dark"] .footer {
+  color: #d5ff40;
 }
 
 /* Fade In Animation */
