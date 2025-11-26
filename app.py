@@ -13,7 +13,8 @@ Session(app)
 @app.route("/")
 def index():
     if session.get("logged_in"):
-        return render_template("home.html", title="Home", body_class="home-body")
+        theme = session.get("theme", "light")
+        return render_template("home.html", title="Home", body_class="home-body", theme=theme)
 
     return render_template("index.html", title="Login", body_class="login-body")
 
@@ -25,23 +26,28 @@ def login():
 
     if username == "Demo_user" and password == "pass1234":
         session["logged_in"] = True
-        
+        session["theme"] = "light"  # default theme
+
+        # If HTMX request → return partial
         if "HX-Request" in request.headers:
-            return render_template("home_partial.html", show_welcome=True)
+            return render_template("home_partial.html", theme="light", show_welcome=True)
 
-        return render_template(
-            "home.html",
-            show_welcome=True,
-            title="Home",
-            body_class="home-body",
-        )
+        return render_template("home.html", theme="light", show_welcome=True)
 
-    return render_template(
-        "index.html",
-        error="Invalid username or password!",
-        title="Login",
-        body_class="login-body",
-    )
+    return render_template("index.html", error="Invalid username or password!")
+
+
+@app.route("/toggle-theme", methods=["POST"])
+def toggle_theme():
+    if not session.get("logged_in"):#If someone tries to open POST /toggle-theme WITHOUT logging in…This line stops them:
+        return "Not logged in", 401
+
+    current_theme = session.get("theme", "light")
+    new_theme = "dark" if current_theme == "light" else "light"
+    session["theme"] = new_theme
+
+    # Return updated partial view ONLY
+    return render_template("home_partial.html", theme=new_theme)
 
 
 @app.route("/logout")
